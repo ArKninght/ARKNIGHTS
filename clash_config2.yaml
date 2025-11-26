@@ -11,6 +11,7 @@ proxies:
     server: 45.152.66.230      # 服务端 HY2 客户端的 IP
     port: 1080
     udp: true
+    skip-cert-verify: true
 
 proxy-groups:
   - name: "Auto"
@@ -19,4 +20,18 @@ proxy-groups:
       - "HY2-Server-Client"
 
 rules:
+  - GEOIP,CN,DIRECT
+  - DOMAIN-SUFFIX,google.com,Auto
+  - DOMAIN-KEYWORD,youtube,Auto
   - MATCH,Auto
+
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  fallback:
+    - 8.8.4.4
+    - 1.0.0.1
