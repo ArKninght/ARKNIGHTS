@@ -1,0 +1,22 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+allow-lan: true
+mode: Rule
+log-level: info
+
+proxies:
+  - name: "HY2-Server-Client"
+    type: socks5
+    server: 45.152.66.230      # 服务端 HY2 客户端的 IP
+    port: 1080
+    udp: true
+
+proxy-groups:
+  - name: "Auto"
+    type: select
+    proxies:
+      - "HY2-Server-Client"
+
+rules:
+  - MATCH,Auto
