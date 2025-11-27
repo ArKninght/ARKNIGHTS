@@ -1,0 +1,33 @@
+# ==========================
+# Sparkle / Clash Meta HY2 配置
+# ==========================
+
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+
+proxies:
+  - name: "HY2-Server"
+    type: hysteria2
+    server: 45.152.66.230
+    port: 8443
+
+    # 你的 HY2 密码
+    password: "PBYsDebian12hy2"
+
+    # 无证书服务器必须这样写
+    insecure: true
+    sni: Hysteria2
+    skip-cert-verify: true
+
+proxy-groups:
+  - name: "Proxy"
+    type: select
+    proxies:
+      - "HY2-Server"
+      - DIRECT
+
+rules:
+  - MATCH,Proxy
+
